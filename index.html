@@ -1,0 +1,164 @@
+<div id="dmca-form">
+    <form>
+        <div class="form-group">
+            <label for="infringingWebsite">Infringing Website URL</label>
+            <input type="text" class="form-control" id="infringingWebsite" required="">
+        </div>
+        <div class="form-group">
+            <label for="infringingOwner">Infringing Owner Name</label>
+            <input type="text" class="form-control" id="infringingOwner" required="">
+        </div>
+        <div class="form-group">
+            <label for="emailTo">Email To Whom You Are Sending Notice</label>
+            <input type="email" class="form-control" id="emailTo" required="">
+        </div>
+        <div class="form-group">
+            <label for="companyName">Your Company Name</label>
+            <input type="text" class="form-control" id="companyName" required="">
+        </div>
+        <div class="form-group">
+            <label for="yourName">Your Name</label>
+            <input type="text" class="form-control" id="yourName" required="">
+        </div>
+        <div class="form-group">
+            <label for="yourEmail">Your Email</label>
+            <input type="email" class="form-control" id="yourEmail" required="">
+        </div>
+        <div class="form-group">
+            <label for="yourAddress">Your Address</label>
+            <input type="text" class="form-control" id="yourAddress" required="">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" required="">
+        </div>
+        <div class="form-group">
+            <label for="state">State / Province / Region</label>
+            <input type="text" class="form-control" id="state" required="">
+        </div>
+        <div class="form-group">
+            <label for="postalCode">ZIP / Postal Code</label>
+            <input type="text" class="form-control" id="postalCode" required="">
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" required="">
+        </div>
+       
+        <div class="form-group">
+            <label for="infringingLinks">Infringing Material Links</label>
+            <textarea class="form-control" id="infringingLinks" rows="3" required=""></textarea>
+        </div>
+        <button type="button" id="generate" class="btn btn-primary">Generate</button>
+    </form>
+    <div id="notice" style="display:none;"></div>
+    <button type="button" id="copy" class="btn btn-secondary">Copy</button>
+
+    <script>
+
+        document.getElementById("generate").addEventListener("click", function () {
+            var infringingWebsiteUrl = document.getElementById("infringingWebsite").value;
+            var infringingOwnerName = document.getElementById("infringingOwner").value;
+            var companyName = document.getElementById("companyName").value;
+            var yourName = document.getElementById("yourName").value;
+            var address = document.getElementById("yourAddress").value;
+            var city = document.getElementById("city").value;
+            var state = document.getElementById("state").value;
+            var postalCode = document.getElementById("postalCode").value;
+            var country = document.getElementById("country").value;
+            var yourEmail = document.getElementById("yourEmail").value;
+            var infringingMaterialLinks = document.getElementById("infringingLinks").value;
+
+            var notice = `Dear ${infringingOwnerName}, <br>
+
+    I am writing this letter on behalf of ${companyName}. I have come to know that your website, ${infringingWebsiteUrl}, is hosting copyrighted material belonging to ${companyName} without our permission. 
+    <br> The infringing material can be found at the following links: <br>
+    ${infringingMaterialLinks}.
+    <br>
+    This unauthorized use of our content constitutes copyright infringement under the Digital Millennium Copyright Act (DMCA). I request you to immediately remove the infringing material from your website. <br>
+    
+    The information in this notice is accurate and I am the authorized representative of ${companyName}. I declare under penalty of perjury that I have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law.
+    
+    I would appreciate your prompt action in this matter.
+    
+    Your prompt attention to this matter will be greatly appreciated. <br>
+    
+    Sincerely, <br>
+    
+    Name: ${yourName} <br>
+    Contact Mail: ${yourEmail} <br>
+    Company Name: ${companyName} <br>
+    Address: ${address} <br>
+    City: ${city} <br>
+    State: ${state} <br>
+    ZipCode: ${postalCode} <br>
+    Country: ${country} `;
+    
+            document.getElementById("notice").innerHTML = notice;
+            document.getElementById("notice").style.display = "block";
+        });
+
+    </script>
+
+    <style>
+        #dmca-form {
+            width: 100%;
+        }
+
+        #dmca-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #notice {
+            margin-top: 20px;
+            
+            padding: 10px;
+            box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.63);
+            border: solid 3px black;
+border-radius: 10px;
+
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+
+
+    <script>
+        document.getElementById("generate").addEventListener("click", function () {
+            // Code to generate DMCA notice
+
+            // Display the generated notice
+            document.getElementById("notice").style.display = "block";
+            document.getElementById("copy").style.display = "inline-block";
+
+            // Function to copy the generated notice to clipboard
+            document.getElementById("copy").addEventListener("click", function () {
+                var notice = document.getElementById("notice").innerText;
+                var dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = notice;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                alert("Copied to clipboard!");
+            });
+        });
+    </script>
